@@ -1,13 +1,11 @@
 #ifndef Host_h
 #define Host_h
-
 int host(
          dispatch_queue_t queue,
          float* test_x,
          float* test_y,
          float* test_z
          ){
-        // Create GPU memory
     void* mem_x  = gcl_malloc(sizeof(cl_float) * NUM_VALUES, test_x,
                               CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR);
     void* mem_y  = gcl_malloc(sizeof(cl_float) * NUM_VALUES, test_y,
@@ -49,7 +47,6 @@ int host(
                       (cl_float*)mem_y,
                       (cl_float*)mem_z,
                       NUM_VALUES);
-            // Copy output data from GPU memory to application memory
         gcl_memcpy(test_z, mem_z, sizeof(cl_float) * NUM_VALUES);
     });
     gcl_free(mem_x);

@@ -20,7 +20,12 @@ kernel void square(
                    const int NUM)
 {
     int i = get_global_id(0);
+    float sum;
     if (i < NUM){
-      __z__[i] = __x__[i] + __y__[i];
+        sum = 0;
+        for (int j = i; j < NUM; j++){
+            sum += __y__[j];
+        }
+        __z__[i] = __x__[i] + sum;
     }
 }
